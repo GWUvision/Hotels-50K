@@ -1,0 +1,4 @@
+input/test_set.json
+input/train_set.json
+images/*/*/*/*.jpg
+images/*/*/*.jpg
