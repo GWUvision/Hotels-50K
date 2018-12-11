@@ -1,5 +1,5 @@
 # Hotels-50K
-![Hotel Recognition](https://www2.seas.gwu.edu/~astylianou/images/hotels50k/trafficking_hotel_recognition.png =250x)
+<img src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/trafficking_hotel_recognition.png" width="50%">
 
 The Hotels-50K dataset was created to encourage work in hotel recognition, the task of identifying the hotel in images taken in hotel rooms. This task is particularly important as many photographs of human trafficking victims are captured in hotel rooms, and identifying which hotels the victims were photographed in is a top priority for trafficking investigators.
 
