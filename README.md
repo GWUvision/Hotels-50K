@@ -1,4 +1,6 @@
 # Hotels-50K
+![Hotel Recognition](https://www2.seas.gwu.edu/~astylianou/images/hotels50k/hotel_recognition.png)
+
 The Hotels-50K dataset was created to encourage work in hotel recognition, the task of identifying the hotel in images taken in hotel rooms. This task is particularly important as many photographs of human trafficking victims are captured in hotel rooms, and identifying which hotels the victims were photographed in is a top priority for trafficking investigators.
 
 The Hotels-50K dataset (introduced in https://todo.com/paper.pdf) consists of over 1 million images from 50,000 different hotels around the world. These images come from both travel websites, as well as the TraffickCam mobile application, which allows every day travelers to submit images of their hotel room in order to help combat trafficking. The TraffickCam images are more visually similar to images from trafficking investigations than the images from travel websites.
@@ -24,6 +26,17 @@ The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' 
 * train_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 * test_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 
-To download the training images, we provide the 'input/download_train.py' file, which utilizes the python multiprocessing library to download the images in the train_set file to 'images/train'.
+The test images (unoccluded and occluded) can be downloaded from https://todo.com/test.tar.gz.
 
-The test images (unoccluded and occluded) can be downloaded from https://todo.com/test.tar.gz
+To download the training images, we provide the 'download_train.py' file, which downloads and resizes the images in the train_set file into 'images/train'.
+
+The script downloads the images into the following structure (which matches the test image organization):
+
+images/train/chain_id/hotel_id/data_source/image_id.jpg
+
+## Test Images and People Masks
+The testing dataset includes three folders: unoccluded, medium_occlusions, large_occlusions. The images within these folders are organized in the same structure as the training set.
+
+The test images in the medium_occlusions and large_occlusions folder are pre-masked with people shaped occlusions extracted from the MS COCO dataset, to mimic the sorts of occlusions found in real world trafficking victim photographs.
+
+In addition to the masked test images, we additionally provide a set of people shaped occlusions which aren't used in the test set, that can be used during your training process. These images can be found in the 'images/people_crops.tar.gz' compressed folder.
