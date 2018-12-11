@@ -14,7 +14,7 @@ We recommend using Python 2.7. To insure the correct dependencies are installed,
 pip install -r requirements.txt
 ```
 
-The evaluation code additionally requires the Facebook Research '''Fair AI Similarity Search (FAISS)''' library which can be installed using the directions at: https://github.com/facebookresearch/faiss/blob/master/INSTALL.md.
+The provided evaluation code additionally requires the Facebook Research '''Fair AI Similarity Search (FAISS)''' library which can be installed using the directions at: https://github.com/facebookresearch/faiss/blob/master/INSTALL.md.
 
 ## Downloading the dataset
 The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' file. When you un-compress this folder, you will find four csv files with the following headers:
