@@ -5,7 +5,7 @@
 
 The Hotels-50K dataset was created to encourage work in hotel recognition, the task of identifying the hotel in images taken in hotel rooms. This task is particularly important as many photographs of human trafficking victims are captured in hotel rooms, and identifying which hotels the victims were photographed in is a top priority for trafficking investigators.
 
-The Hotels-50K dataset (introduced in http://zippy.seas.gwu.edu/~pless/papers/Hotels50k.pdf) consists of over 1 million images from 50,000 different hotels around the world. These images come from both travel websites, as well as the TraffickCam mobile application, which allows every day travelers to submit images of their hotel room in order to help combat trafficking. The TraffickCam images are more visually similar to images from trafficking investigations than the images from travel websites.
+The Hotels-50K dataset (introduced in https://www2.seas.gwu.edu/~pless/papers/Hotels50k.pdf) consists of over 1 million images from 50,000 different hotels around the world. These images come from both travel websites, as well as the TraffickCam mobile application, which allows every day travelers to submit images of their hotel room in order to help combat trafficking. The TraffickCam images are more visually similar to images from trafficking investigations than the images from travel websites.
 
 The training dataset includes 1,027,871 images from 50,000 hotels, and 92 major hotel chains. Of the 50,000 hotels, 13,900 include user contributed images from the TraffickCam application  (a total of 55,061 TraffickCam images are included in the training set).
 
@@ -28,7 +28,7 @@ The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' 
 * train_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 * test_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 
-The test images (unoccluded and occluded) can be downloaded from http://zippy.seas.gwu.edu/~astylianou/hotels50k/test.tar.gz (3.14GB; to match the training dataset structure, download this file to the images directory and decompress it there).
+The test images (unoccluded and occluded) can be downloaded from https://www2.seas.gwu.edu/~astylianou/hotels50k/test.tar.gz (3.14GB; to match the training dataset structure, download this file to the images directory and decompress it there).
 
 To download the training images, we provide the 'download_train.py' file, which downloads and scales down the images in the train_set file into 'images/train' (make sure you've decompressed the 'input/dataset.tar.gz' folder first).
 
