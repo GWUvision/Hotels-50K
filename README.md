@@ -18,8 +18,6 @@ We recommend using Python 2.7. To insure the correct dependencies are installed,
 pip install -r requirements.txt
 ```
 
-The provided evaluation code additionally requires the Facebook Research '''Fair AI Similarity Search (FAISS)''' library which can be installed using the directions at: https://github.com/facebookresearch/faiss/blob/master/INSTALL.md.
-
 ## Downloading the dataset
 The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' file. When you decompress this folder, you will find four csv files with the following headers:
 
@@ -34,13 +32,76 @@ To download the training images, we provide the 'download_train.py' file, which 
 
 The script downloads the images into the following structure (which matches the test image organization):
 
+<p style="text-align: center;">
 images/train/chain_id/hotel_id/data_source/image_id.jpg
+</p>
 
 ## Test Images and People Masks
 The testing dataset includes four folders: unoccluded, low_occlusions, medium_occlusions, high_occlusions. The images within these folders are organized in the same structure as the training set.
 
 The test images in the low_occlusions, medium_occlusions and high_occlusions folders are pre-masked with people shaped occlusions extracted from the MS COCO dataset, to mimic the sorts of occlusions found in real world trafficking victim photographs. The mask applied to a particular image can be found in the folder:
 
+<p style="text-align: center;">
 images/test/(low/medium/high)\_occlusions/chain_id/hotel_id/data_source/masks/image_id.png
+</p>
 
 In addition to the masked test images, we additionally provide a set of people shaped occlusions which aren't used in the test set, that can be used during your training process. These images can be found in the 'images/people_crops.tar.gz' compressed folder.
+
+## Evaluation
+We provide code to evaluate how well different approaches perform hotel recognition in the context of human trafficking investigations. There are two different metrics that are computed: image retrieval ('evaluate/retrieval.py') and multi-class log loss ('evaluate/log_loss.py').
+
+### Retrieval
+
+```
+python evaluate/retrieval.py top_results.csv
+```
+
+The retrieval evaluation code reports the average top-K accuracy (K={1,10,100}) by both hotel instance and hotel chain for a particular test set.
+
+It expects as input a comma-separated file, where each row should be formatted as follows:
+
+test_image_id, result1_image_id, result2_image_id, ... , result100_image_id
+
+Image IDs can be extracted from the image file names (each file is named image_id.jpg).
+
+You can generate CSVs for each of the test sets with varying occlusion levels, to evaluate how your approach performs as a function of the size of the occlusion.
+
+The following figure shows the top-K retrieval results (%) by hotel instance from the original Hotels50K paper:
+
+<p align="center">
+  <img src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/retrieval_results.png">
+</p>
+
+### Log Loss
+
+```
+python evaluate/log_loss.py class_probabilities.csv
+```
+
+<p align="center"><b><i>OR</b></i></p>
+
+```
+python evaluate/log_loss.py top_results.csv --convertToPosterior
+```
+
+The log loss evaluation code reports the multi-class log loss by both hotel instance and hotel chain for a particular test set.
+
+It can either take as input a csv of class probabilities organized as follows:
+
+<p align="center">
+test_image_id, class1_id, class1_probability, class2_id, class2_probability, ... , class50000_id, class50000_probability
+</p>
+
+Or the retrieval csv:
+
+<p align="center">
+test_image_id, result1_image_id, result2_image_id, ... , result100_image_id
+</p>
+
+If you pass in the retrieval CSV, you should include the <b><i>"--convertToPosterior"</b></i> flag. This will convert the k-NN retrieval results into posterior probabilities which can be used to compute the multi-class log loss metric.
+
+The following figure shows the log loss by hotel instance from the original Hotels50K paper:
+
+<p align="center">
+  <img src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/log_loss.png">
+</p>
