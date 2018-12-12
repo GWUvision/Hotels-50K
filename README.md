@@ -53,10 +53,10 @@ We provide code to evaluate how well different approaches perform hotel recognit
 ### Retrieval
 
 ```
-python evaluate/retrieval.py top_results.csv
+python evaluate/retrieval.py knn_results.csv
 ```
 
-The retrieval evaluation code reports the average top-K accuracy (K={1,10,100}) by both hotel instance and hotel chain for a particular test set.
+The retrieval evaluation code reports the average top-K accuracy by both hotel instance (K={1,10,100}) and hotel chain (K={1,3,5}).
 
 It expects as input a comma-separated file, where each row should be formatted as follows:
 
@@ -64,12 +64,12 @@ test_image_id, result1_image_id, result2_image_id, ... , result100_image_id
 
 Image IDs can be extracted from the image file names (each file is named image_id.jpg).
 
-You can generate CSVs for each of the test sets with varying occlusion levels, to evaluate how your approach performs as a function of the size of the occlusion.
+You can generate CSVs for each of the test sets with varying occlusion levels to evaluate how your approach performs as a function of the size of the occlusion.
 
 The following figure shows the top-K retrieval results (%) by hotel instance from the original Hotels50K paper:
 
 <p align="center">
-  <img src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/retrieval_results.png">
+  <img width=75% src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/retrieval_results.png">
 </p>
 
 ### Log Loss
@@ -98,10 +98,10 @@ Or the retrieval csv:
 test_image_id, result1_image_id, result2_image_id, ... , result100_image_id
 </p>
 
-If you pass in the retrieval CSV, you should include the <b><i>"--convertToPosterior"</b></i> flag. This will convert the k-NN retrieval results into posterior probabilities which can be used to compute the multi-class log loss metric.
+If you pass in the retrieval CSV, you should include the "<b><i>--convertToPosterior</b></i>" flag. This will convert the k-NN retrieval results into posterior probabilities which can be used to compute the multi-class log loss metric.
 
-The following figure shows the log loss by hotel instance from the original Hotels50K paper:
+The following figure shows the log loss by hotel instance from the original Hotels50K paper (computed by converting the k-NN results to posterior probabilities, where k=100):
 
 <p align="center">
-  <img src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/log_loss.png">
+  <img width=45% src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/log_loss.png">
 </p>
