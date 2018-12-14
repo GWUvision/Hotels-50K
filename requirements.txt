@@ -1,2 +1,3 @@
 opencv-python
 tensorflow-gpu>=1.5
+sklearn

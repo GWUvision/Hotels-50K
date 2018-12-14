@@ -78,30 +78,24 @@ The following figure shows the top-K retrieval results (%) by hotel instance fro
 python evaluate/log_loss.py class_probabilities.csv
 ```
 
-<p align="center"><b><i>OR</b></i></p>
-
-```
-python evaluate/log_loss.py top_results.csv --convertToPosterior
-```
-
-The log loss evaluation code reports the multi-class log loss by both hotel instance and hotel chain for a particular test set.
-
-It can either take as input a csv of class probabilities organized as follows:
+The log loss evaluation code reports the multi-class log loss by both hotel instance and hotel chain for a particular test set, and takes as input a csv of class probabilities organized as follows:
 
 <p align="center">
 test_image_id, class1_id, class1_probability, class2_id, class2_probability, ... , class50000_id, class50000_probability
 </p>
 
-Or the retrieval csv:
+If you just have retrieval results (for example, if you trained an embedding and don't have class probabilities), you can use the following script to convert the k-NN retrieval results from above to class probabilities:
 
-<p align="center">
-test_image_id, result1_image_id, result2_image_id, ... , result100_image_id
-</p>
+```
+python evaluate/convert_knn_to_probabilities.py knn_results.csv
+```
 
-If you pass in the retrieval CSV, you should include the "<b><i>--convertToPosterior</b></i>" flag. This will convert the k-NN retrieval results into posterior probabilities which can be used to compute the multi-class log loss metric.
+This will convert the k-NN retrieval results into posterior probabilities which can then be used as the input to the multi-class log loss metric.
 
 The following figure shows the log loss by hotel instance from the original Hotels50K paper (computed by converting the k-NN results to posterior probabilities, where k=100):
 
 <p align="center">
   <img width=45% src="https://www2.seas.gwu.edu/~astylianou/images/hotels50k/log_loss.png">
 </p>
+
+*Note: If you are converting from k-NN retrieval results to class probabilities, you may want to modify your retrieval results and the convert_knn_to_probabilities.py to consider k > 100.*
