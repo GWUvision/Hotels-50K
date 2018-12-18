@@ -43,17 +43,17 @@ class BatchAllSet:
             split_im = im.split('/')
             image_id = int(split_im[-1].split('.')[0])
             source = split_im[-2]
-            cls = split_im[-3]
-            chain = split_im[-4]
+            cls = int(split_im[-3])
+            chain = int(split_im[-4])
             if not cls in self.classes:
                 self.classes[cls] = {}
-                self.classes[cls]['ims'] = []
+                self.classes[cls]['images'] = []
                 self.classes[cls]['sources'] = []
-            self.classes[cls]['ims'].append(im)
+            self.classes[cls]['images'].append(im)
             self.classes[cls]['sources'].append(source)
 
         for cls in self.classes.keys():
-            if len(self.classes[cls]['ims']) < self.numPos:
+            if len(self.classes[cls]['images']) < self.numPos:
                 self.classes.pop(cls)
 
         self.people_crop_files = glob.glob(os.path.join(peopleDir,'*.png'))
@@ -213,7 +213,7 @@ class NonTripletSet(BatchAllSet):
             chain = split_im[-4]
             if not cls in self.classes:
                 self.classes[cls] = {}
-                self.classes[cls]['ims'] = []
+                self.classes[cls]['images'] = []
                 self.classes[cls]['sources'] = []
             self.classes[cls]['ims'].append(im)
             self.classes[cls]['sources'].append(source)
