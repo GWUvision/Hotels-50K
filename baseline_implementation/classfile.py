@@ -205,13 +205,17 @@ class NonTripletSet(BatchAllSet):
         self.batchSize = batchSize
 
         self.classes = {}
-        # Reads a .txt file containing image paths of image sets where each line contains
-        # all images from the same set and the first image is the anchor
-        f = open(image_list, 'r')
-        for line in f:
-            temp = line.strip('\n').split(' ')
-            cls = int(temp[0].split('/')[clsPos])
-            self.classes[cls] = {}
-            self.classes[cls]['ims'] = temp
+        for im in image_list:
+            split_im = im.split('/')
+            image_id = int(split_im[-1].split('.')[0])
+            source = split_im[-2]
+            cls = split_im[-3]
+            chain = split_im[-4]
+            if not cls in self.classes:
+                self.classes[cls] = {}
+                self.classes[cls]['ims'] = []
+                self.classes[cls]['sources'] = []
+            self.classes[cls]['ims'].append(im)
+            self.classes[cls]['sources'].append(source)
 
         self.people_crop_files = glob.glob(os.path.join(peopleDir,'*.png'))
