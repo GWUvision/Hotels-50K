@@ -203,8 +203,8 @@ class NonTripletSet(BatchAllSet):
             split_im = im.split('/')
             image_id = int(split_im[-1].split('.')[0])
             source = split_im[-2]
-            cls = split_im[-3]
-            chain = split_im[-4]
+            cls = int(split_im[-3])
+            chain = int(split_im[-4])
             if not cls in self.classes:
                 self.classes[cls] = {}
                 self.classes[cls]['images'] = []
