@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 14 11:49:13 2016
-
-@author: souvenir
-"""
-
 import numpy as np
 import cv2
 import random
@@ -215,7 +209,7 @@ class NonTripletSet(BatchAllSet):
                 self.classes[cls] = {}
                 self.classes[cls]['images'] = []
                 self.classes[cls]['sources'] = []
-            self.classes[cls]['ims'].append(im)
+            self.classes[cls]['images'].append(im)
             self.classes[cls]['sources'].append(source)
 
         self.people_crop_files = glob.glob(os.path.join(peopleDir,'*.png'))
