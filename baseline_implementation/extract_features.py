@@ -50,18 +50,21 @@ def main():
 
         test_images = glob.glob(os.path.join('../images/test',occlusion,'*/*/*/*.jpg'))
         test_data = NonTripletSet(test_images, mean_file, img_size, crop_size, isTraining=False)
+        test_paths = []
         test_ims = []
         test_classes = []
         for cls in test_data.classes.keys():
             for im in test_data.classes[cls]['images']:
+                test_paths.append(im)
                 test_ims.append(int(im.split('/')[-1].split('.')[0])) # convert image path to image id
                 test_classes.append(cls)
 
+        test_paths = np.array(test_paths)
         test_ims = np.array(test_ims)
         test_classes = np.array(test_classes)
         test_feats = np.zeros((test_ims.shape[0],output_size))
         for ix in range(0,test_ims.shape[0],batch_size):
-            image_list = test_ims[ix:ix+batch_size]
+            image_list = test_paths[ix:ix+batch_size]
             batch = test_data.getBatchFromImageList(image_list)
             ff = sess.run(feat,{image_batch:batch})
             test_feats[ix:ix+ff.shape[0],:] = ff
@@ -71,18 +74,21 @@ def main():
             save_h5('test_feats',test_feats,'f',os.path.join(test_output_dir,'testFeats.h5'))
 
     train_data = NonTripletSet(train_images, mean_file, img_size, crop_size, isTraining=False)
+    train_paths = []
     train_ims = []
     train_classes = []
     for cls in train_data.classes.keys():
         for im in train_data.classes[cls]['images']:
+            train_paths.append(im)
             train_ims.append(int(im.split('/')[-1].split('.')[0]))  # convert image path to image id
             train_classes.append(cls)
 
+    train_paths = np.array(train_paths)
     train_ims = np.array(train_ims)
     train_classes = np.array(train_classes)
     train_feats = np.zeros((train_ims.shape[0],output_size))
     for ix in range(0,train_ims.shape[0],batch_size):
-        image_list = train_ims[ix:ix+batch_size]
+        image_list = train_paths[ix:ix+batch_size]
         batch = train_data.getBatchFromImageList(image_list)
         ff = sess.run(feat,{image_batch:batch})
         train_feats[ix:ix+ff.shape[0],:] = ff
