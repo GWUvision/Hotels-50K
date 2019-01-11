@@ -48,6 +48,8 @@ images/test/(low/medium/high)\_occlusions/chain_id/hotel_id/data_source/masks/im
 In addition to the masked test images, we additionally provide a set of people shaped occlusions which aren't used in the test set, that can be used during your training process. These images can be found in the 'images/people_crops.tar.gz' compressed folder.
 
 ## Evaluation
+<b><i>This evaluation section is still being finalized. Please check back for finalized evaluation code and instructions closer to our AAAI presentation at the end of January 2019.</i></b>
+
 We provide code to evaluate how well different approaches perform hotel recognition in the context of human trafficking investigations. There are two different metrics that are computed: image retrieval ('evaluate/retrieval.py') and multi-class log loss ('evaluate/log_loss.py').
 
 ### Retrieval
