@@ -42,6 +42,7 @@ def main():
     saver = tf.train.Saver()
     saver.restore(sess, pretrained_net)
 
+    # For each occlusion level, extract and save out the test data.
     occlusion_levels = ['unoccluded','low_occlusions','medium_occlusions','high_occlusions']
     for occlusion in occlusion_levels:
         test_output_dir = os.path.join('./features/',occlusion)
