@@ -23,7 +23,7 @@ def main(input_file,output_file):
     hotel_class_probabilties = np.zeros((0,hotel_class_ids.shape[0]))
 
     with open(input_file) as in_f:
-        with open(output_file) as out_f:
+        with open(output_file,'wb') as out_f:
             csv_reader = csv.reader(in_f,delimiter=',')
             lnNum = 0
             for row in csv_reader:
