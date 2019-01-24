@@ -3,7 +3,6 @@ from classfile import *
 import numpy as np
 import tensorflow.contrib.slim as slim
 from nets import resnet_v2
-import faiss
 import h5py
 import sys
 import glob
@@ -12,11 +11,6 @@ def save_h5(data_description,data,data_type,path):
     h5_feats=h5py.File(path,'w')
     h5_feats.create_dataset(data_description, data=data, dtype=data_type)
     h5_feats.close()
-
-def load_h5(data_description,path):
-    with h5py.File(path, 'r') as hf:
-        data = hf[data_description][:]
-    return data
 
 def main():
     output_dir = './features/'
