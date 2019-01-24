@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import sys
 
 def id_to_class_parser(dataset_file):
     id_to_class = {}
