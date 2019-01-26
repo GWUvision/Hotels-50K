@@ -1,19 +1,7 @@
 import csv
 import numpy as np
 import sys
-
-def id_to_class_parser(dataset_file):
-    id_to_class = {}
-    with open(dataset_file) as f:
-        csv_reader = csv.reader(f,delimiter=',')
-        lnNum = 0
-        for row in csv_reader:
-            if lnNum == 0:
-                pass
-            else:
-                id_to_class[int(row[0])] = int(row[1])
-            lnNum += 1
-    return id_to_class
+from utils import id_to_class_parser
 
 def main(input_file,output_file):
     test_id_to_class = id_to_class_parser('../input/dataset/test_set.csv')
@@ -40,10 +28,10 @@ def main(input_file,output_file):
                         print "Result  image ID ("+row[1+idx]+") in row " + str(lnNum) + " is unknown."
                         break
 
-                class_probabilities = class_probabilities / 100.
                 non_zero_inds = np.where(class_probabilities>0)[0]
+                class_probabilities = class_probabilities / non_zero_inds.shape[0]
                 prob_str = row[0] + ','
-                prob_str += ','.join(['%i,%0.3f' % (c,p) for c,p in zip(hotel_class_ids[non_zero_inds],class_probabilities[non_zero_inds])])
+                prob_str += ','.join(['%i,%0.3f' % (c,p) for c,p in zip(hotel_class_ids[result_class_ind],class_probabilities[result_class_ind])])
                 prob_str += '\n'
 
                 out_f.writelines(prob_str)
