@@ -94,7 +94,7 @@ If you just have retrieval results (for example, if you trained an embedding and
 python evaluate/convert_knn_to_probabilities.py input_knn_results_file.csv output_class_probabilities_file.csv
 ```
 
-This will convert the k-NN retrieval results into posterior probabilities which can then be used as the input to the multi-class log loss metric, and save the results out to 'output_class_probabilities_file.csv'. (This conversion code is quite slow to run and could likely use refactoring.)
+This will convert the k-NN retrieval results into posterior probabilities which can then be used as the input to the multi-class log loss metric, and save the results out to 'output_class_probabilities_file.csv'.
 
 The following figure shows the log loss by hotel instance from the original Hotels50K paper (computed by converting the k-NN results to posterior probabilities, where k=100):
 
