@@ -35,7 +35,6 @@ def main():
             test_ims = load_h5('test_ims',os.path.join(test_output_dir,'testIms.h5'))
             test_feats = load_h5('test_feats',os.path.join(test_output_dir,'testFeats.h5'))
             for imId,ft in zip(test_ims,test_feats):
-                print occlusion, imId
                 result_dists, result_inds = gpu_index.search(np.expand_dims(ft,0).astype('float32'),100)
                 result_im_inds = train_ims[result_inds[0]]
                 csv_line = str(imId) + ',' + ','.join([str(r) for r in result_im_inds]) +'\n'
