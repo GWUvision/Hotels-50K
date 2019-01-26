@@ -31,7 +31,7 @@ def main():
     occlusion_levels = ['unoccluded','low_occlusions','medium_occlusions','high_occlusions']
     for occlusion in occlusion_levels:
         with open(os.path.join(csv_dir,occlusion+'.csv'),'wb') as csv_file:
-            test_output_dir = os.path.join('./features/',occlusion)
+            test_output_dir = os.path.join(output_dir,occlusion)
             test_ims = load_h5('test_ims',os.path.join(test_output_dir,'testIms.h5'))
             test_feats = load_h5('test_feats',os.path.join(test_output_dir,'testFeats.h5'))
             for imId,ft in zip(test_ims,test_feats):
