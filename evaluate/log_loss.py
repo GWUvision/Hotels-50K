@@ -31,8 +31,10 @@ def main(csv_file):
         csv_reader = csv.reader(cf,delimiter=',')
         lnNum = 0
         for row in csv_reader:
-            if lnNum % 1000 == 0:
-                print 'Computed log loss for rows 0 - ' + str(lnNum)
+            if lnNum % 1000 == 0 and lnNum != 0:
+                print 'Computed log loss for rows ' + str(lnNum-1000) + ' through ' + str(lnNum)
+            if lnNum == 0:
+                print 'Starting to compute log loss. This may take a while!'
             query_image_id = int(row[0])
             result_probs = np.zeros((hotel_class_ids.shape[0]))
             try:
