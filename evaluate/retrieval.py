@@ -45,7 +45,7 @@ def main(csv_file):
         lnNum = 0
         for row in csv_reader:
             query_image_id = int(row[0])
-            if len(row) < 101:
+            if len(row) != 101:
                 print "Expected each row to contain a query image ID and 100 result image IDs. Failed at line: " + str(lnNum)
                 break
             try:
