@@ -20,7 +20,6 @@ def main(input_file,output_file):
     train_id_to_class = id_to_class_parser('../input/dataset/train_set.csv')
 
     hotel_class_ids = np.unique(train_id_to_class.values())
-    hotel_class_probabilties = np.zeros((0,hotel_class_ids.shape[0]))
 
     with open(input_file) as in_f:
         with open(output_file,'wb') as out_f:
@@ -42,8 +41,9 @@ def main(input_file,output_file):
                         break
 
                 class_probabilities = class_probabilities / 100.
+                non_zero_inds = np.where(class_probabilities>0)[0]
                 prob_str = row[0] + ','
-                prob_str += ','.join(['%i,%0.3f' % (c,p) for c,p in zip(hotel_class_ids,class_probabilities)])
+                prob_str += ','.join(['%i,%0.3f' % (c,p) for c,p in zip(hotel_class_ids[non_zero_inds],class_probabilities[non_zero_inds])])
                 prob_str += '\n'
 
                 out_f.writelines(prob_str)
