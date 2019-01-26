@@ -56,7 +56,7 @@ def main(csv_file):
             lnNum += 1
 
     print 'Log loss for ' + csv_file
-    print np.mean(losses)
+    print '%0.2f' % (np.mean(losses))
 
 if __name__ == "__main__":
     args = sys.argv
