@@ -9,7 +9,8 @@ def load_h5(data_description,path):
     return data
 
 def main():
-    output_dir = './features/'
+    dirname = os.path.dirname(__file__)
+    output_dir = os.path.join(dirname, 'features')
 
     train_ims = load_h5('train_ims',os.path.join(output_dir,'trainIms.h5'))
     train_classes = load_h5('train_classes',os.path.join(output_dir,'trainClasses.h5'))
@@ -23,7 +24,7 @@ def main():
     for feat in train_feats:
         gpu_index.add(np.expand_dims(feat,0))
 
-    csv_dir = './csv_output'
+    csv_dir = os.path.join(dirname,'csv_output')
     if not os.path.exists(csv_dir):
         os.makedirs(csv_dir)
 

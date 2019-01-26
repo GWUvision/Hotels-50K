@@ -12,16 +12,16 @@ def save_h5(data_description,data,data_type,path):
     h5_feats.create_dataset(data_description, data=data, dtype=data_type)
     h5_feats.close()
 
-def main():
-    output_dir = './features/'
-    pretrained_net = './baseline_snapshot/baseline_snapshot'
-    train_images = glob.glob('../images/train/*/*/*/*.jpg')
+def main(pretrained_model):
+    dirname = os.path.dirname(__file__)
+    output_dir = os.path.join(dirname, 'features')
+    train_images = glob.glob(os.path.join(dirname,'..','images/train/*/*/*/*.jpg'))
 
     img_size = [256, 256]
     crop_size = [224, 224]
     batch_size = 120
     output_size = 256
-    mean_file = '../input/meanIm.npy'
+    mean_file = os.path.join(dirname,'..','input/meanIm.npy')
     image_batch = tf.placeholder(tf.float32, shape=[None, crop_size[0], crop_size[0], 3])
 
     print("Preparing network...")
@@ -34,16 +34,16 @@ def main():
     c.gpu_options.visible_device_list=str(3) # specify which gpu you want to run on
     sess = tf.Session(config=c)
     saver = tf.train.Saver()
-    saver.restore(sess, pretrained_net)
+    saver.restore(sess, pretrained_model)
 
     # For each occlusion level, extract and save out the test data.
     occlusion_levels = ['unoccluded','low_occlusions','medium_occlusions','high_occlusions']
     for occlusion in occlusion_levels:
-        test_output_dir = os.path.join('./features/',occlusion)
+        test_output_dir = os.path.join(dirname,'features/',occlusion)
         if not os.path.exists(test_output_dir):
             os.makedirs(test_output_dir)
 
-        test_images = glob.glob(os.path.join('../images/test',occlusion,'*/*/*/*.jpg'))
+        test_images = glob.glob(os.path.join(dirname,'..','images/test',occlusion,'*/*/*/*.jpg'))
         test_data = NonTripletSet(test_images, mean_file, img_size, crop_size, isTraining=False)
         test_paths = []
         test_ims = []
@@ -94,4 +94,8 @@ def main():
     save_h5('train_feats',train_feats,'f',os.path.join(output_dir,'trainFeats.h5'))
 
 if __name__ == "__main__":
-    main()
+    args = sys.argv
+    if len(args) < 2:
+        print 'Expected input parameters: pretrained_model'
+    pretrained_model = args[1]
+    main(pretrained_model)
