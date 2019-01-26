@@ -4,8 +4,8 @@ import sys
 from utils import id_to_class_parser
 
 def main(input_file,output_file):
-    test_id_to_class = id_to_class_parser('../input/dataset/test_set.csv')
-    train_id_to_class = id_to_class_parser('../input/dataset/train_set.csv')
+    test_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/test_set.csv'))
+    train_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/train_set.csv'))
 
     hotel_class_ids = np.unique(train_id_to_class.values())
 

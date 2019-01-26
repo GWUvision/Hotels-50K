@@ -7,9 +7,9 @@ import sys
 from utils import id_to_class_parser, class_to_chain_parser
 
 def main(csv_file):
-    test_id_to_class = id_to_class_parser('../input/dataset/test_set.csv')
-    train_id_to_class = id_to_class_parser('../input/dataset/train_set.csv')
-    classes_to_chain = class_to_chain_parser('../input/dataset/hotel_info.csv')
+    test_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/test_set.csv'))
+    train_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/train_set.csv'))
+    classes_to_chain = class_to_chain_parser(os.path.join(dirname,'..','input/dataset/hotel_info.csv'))
 
     result_dict = {}
     # Check to make sure there are no invalid image IDs in the results file.
