@@ -20,21 +20,45 @@ def id_to_class_parser(dataset_file):
             lnNum += 1
     return id_to_class
 
+# csv_file = '../baseline_implementation/class_prob_output/unoccluded.csv'
 def main(csv_file):
     test_id_to_class = id_to_class_parser('../input/dataset/test_set.csv')
     train_id_to_class = id_to_class_parser('../input/dataset/train_set.csv')
     hotel_class_ids = np.unique(train_id_to_class.values())
 
+    losses = np.array((0))
     with open(csv_file) as cf:
         csv_reader = csv.reader(cf,delimiter=',')
         lnNum = 0
         for row in csv_reader:
+            if lnNum % 1000 == 0:
+                print 'Computed log loss for rows 0 - ' + str(lnNum)
             query_image_id = int(row[0])
-            if len(row) != 100001:
-                print "Expected each row to contain a query image ID and 50000 class ID, probability pairs. Failed at line: " + str(lnNum)
-                break
+            result_probs = np.zeros((hotel_class_ids.shape[0]))
             try:
                 query_class = test_id_to_class[query_image_id]
             except:
                 print "Query image ID ("+row[0]+") in row " + str(lnNum) + " is unknown."
                 break
+
+            # check which classes are in the result file, look up what the class index is for that class
+            result_class_inds = np.array([np.where(hotel_class_ids==int(r))[0][0] for r in row[1::2]])
+            # set the values in result_probs for each class in the result file
+            result_probs[result_class_inds] = np.array([float(r) for r in row[2::2]])
+            # get the index for the correct hotel
+            query_class_ind = np.where(hotel_class_ids==query_class)[0][0]
+
+            # compute the log loss
+            ll = log_loss([query_class_ind],[result_probs],labels=np.arange(hotel_class_ids.shape[0]))
+            losses = np.vstack((losses,ll))
+            lnNum += 1
+
+    print 'Log loss for ' + csv_file
+    print np.mean(losses)
+
+if __name__ == "__main__":
+    args = sys.argv
+    if len(args) < 2:
+        print 'Expected input parameters: csv_file'
+    csv_file = args[1]
+    main(csv_file)
