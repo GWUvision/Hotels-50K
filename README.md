@@ -103,3 +103,21 @@ The following figure shows the log loss by hotel instance from the original Hote
 </p>
 
 *Note: If you are converting from k-NN retrieval results to class probabilities, you may want to modify your retrieval results and the convert_knn_to_probabilities.py to consider k > 100.*
+
+### Reproducing Our Results
+In order to re-produce the results in our paper, you can download our pre-trained model from https://www2.seas.gwu.edu/~astylianou/hotels50k/hotels50k_snapshot.tar.gz.
+
+You can then run:
+
+```
+python baseline_implementation/extract_features.py path_to_pretrained_model
+```
+
+to extract the gallery and test image features for each of the different tests (unoccluded, low, medium and high occlusions).
+
+To compute the CSV file needed for the retrieval evaluation, you will then want to run:
+```
+python baseline_implementation/feats_to_csv.py
+```
+
+This will save out CSV files for each of the tests to baseline_implementation/csv_output. These CSVs can be used directly as the input to the retrieval.py code, and to create the input for the log loss code by using the convert_knn_to_probabilities.py script.
