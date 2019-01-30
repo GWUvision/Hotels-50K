@@ -121,3 +121,15 @@ python baseline_implementation/feats_to_csv.py
 ```
 
 This will save out CSV files for each of the tests to baseline_implementation/csv_output. These CSVs can be used directly as the input to the retrieval.py code, and to create the input for the log loss code by using the convert_knn_to_probabilities.py script.
+
+## Citation
+To cite this work, please use:
+
+```
+@inproceedings{hotels50k,
+  author = {Stylianou, Abby and Xuan, Hong and Shende, Maya and Brandt, Jonathan and Souvenir, Richard and Pless, Robert},
+  title = {Hotels-50K: A Global Hotel Recognition Dataset},
+  booktitle = {The AAAI Conference on Artificial Intelligence (AAAI)},
+  year = {2019}
+}
+```
