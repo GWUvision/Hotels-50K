@@ -1,3 +1,4 @@
+from __future__ import print_function
 # TODO: Update to not expect all 50k classes in the input csv
 # instead, for each query, create the 50k vector, and use hotel_class_ids to index into it.
 
@@ -33,15 +34,15 @@ def main(csv_file):
         lnNum = 0
         for row in csv_reader:
             if lnNum % 1000 == 0 and lnNum != 0:
-                print 'Computed log loss for rows ' + str(lnNum-1000) + ' through ' + str(lnNum)
+                print('Computed log loss for rows ' + str(lnNum-1000) + ' through ' + str(lnNum))
             if lnNum == 0:
-                print 'Starting to compute log loss. This may take a while!'
+                print('Starting to compute log loss. This may take a while!')
             query_image_id = int(row[0])
             result_probs = np.zeros((hotel_class_ids.shape[0]))
             try:
                 query_class = test_id_to_class[query_image_id]
             except:
-                print "Query image ID ("+row[0]+") in row " + str(lnNum) + " is unknown."
+                print("Query image ID ("+row[0]+") in row " + str(lnNum) + " is unknown.")
                 break
 
             # check which classes are in the result file, look up what the class index is for that class
@@ -56,12 +57,12 @@ def main(csv_file):
             losses = np.vstack((losses,ll))
             lnNum += 1
 
-    print 'Log loss for ' + csv_file
-    print '%0.2f' % (np.mean(losses))
+    print('Log loss for ' + csv_file)
+    print('%0.2f' % (np.mean(losses)))
 
 if __name__ == "__main__":
     args = sys.argv
     if len(args) < 2:
-        print 'Expected input parameters: csv_file'
+        print('Expected input parameters: csv_file')
     csv_file = args[1]
     main(csv_file)

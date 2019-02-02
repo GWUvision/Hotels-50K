@@ -1,3 +1,4 @@
+from __future__ import print_function
 import csv
 import numpy as np
 import sys
@@ -17,7 +18,7 @@ def main(input_file,output_file):
                 query_image_id = int(row[0])
                 class_probabilities = np.zeros(hotel_class_ids.shape[0])
                 if len(row) != 101:
-                    print "Expected each row to contain a query image ID and 100 result image IDs. Failed at line: " + str(lnNum)
+                    print("Expected each row to contain a query image ID and 100 result image IDs. Failed at line: " + str(lnNum))
                     break
                 for idx in range(len(row[1:])):
                     try:
@@ -25,7 +26,7 @@ def main(input_file,output_file):
                         result_class_ind = np.where(hotel_class_ids==result_class)[0][0]
                         class_probabilities[result_class_ind] += 1.
                     except:
-                        print "Result  image ID ("+row[1+idx]+") in row " + str(lnNum) + " is unknown."
+                        print("Result  image ID ("+row[1+idx]+") in row " + str(lnNum) + " is unknown.")
                         break
 
                 non_zero_inds = np.where(class_probabilities>0)[0]
@@ -40,7 +41,7 @@ def main(input_file,output_file):
 if __name__ == "__main__":
     args = sys.argv
     if len(args) < 3:
-        print 'Expected input parameters: input_knn_results_file_path, output_class_probabilities_file_path'
+        print('Expected input parameters: input_knn_results_file_path, output_class_probabilities_file_path')
     input_path = args[1]
     output_path = args[2]
     main(input_path,output_path)

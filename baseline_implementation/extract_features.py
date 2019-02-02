@@ -1,3 +1,4 @@
+from __future__ import print_function
 import tensorflow as tf
 from classfile import *
 import numpy as np
@@ -63,7 +64,7 @@ def main(pretrained_model):
             batch = test_data.getBatchFromImageList(image_list)
             ff = sess.run(feat,{image_batch:batch})
             test_feats[ix:ix+ff.shape[0],:] = ff
-            print 'Test features: ',ix+ff.shape[0], ' out of ' , test_feats.shape[0]
+            print('Test features: ',ix+ff.shape[0], ' out of ' , test_feats.shape[0])
             save_h5('test_ims',test_ims,'i8',os.path.join(test_output_dir,'testIms.h5'))
             save_h5('test_classes',test_classes,'i8',os.path.join(test_output_dir,'testClasses.h5'))
             save_h5('test_feats',test_feats,'f',os.path.join(test_output_dir,'testFeats.h5'))
@@ -87,7 +88,7 @@ def main(pretrained_model):
         batch = train_data.getBatchFromImageList(image_list)
         ff = sess.run(feat,{image_batch:batch})
         train_feats[ix:ix+ff.shape[0],:] = ff
-        print 'Train features: ', ix+ff.shape[0], ' out of ' , train_feats.shape[0]
+        print('Train features: ', ix+ff.shape[0], ' out of ' , train_feats.shape[0])
 
     save_h5('train_ims',train_ims,'i8',os.path.join(output_dir,'trainIms.h5'))
     save_h5('train_classes',train_classes,'i8',os.path.join(output_dir,'trainClasses.h5'))
@@ -96,6 +97,6 @@ def main(pretrained_model):
 if __name__ == "__main__":
     args = sys.argv
     if len(args) < 2:
-        print 'Expected input parameters: pretrained_model'
+        print('Expected input parameters: pretrained_model')
     pretrained_model = args[1]
     main(pretrained_model)
