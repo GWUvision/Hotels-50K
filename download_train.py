@@ -1,3 +1,4 @@
+from __future__ import print_function
 import csv, multiprocessing, cv2, os
 import numpy as np
 import urllib
@@ -29,11 +30,11 @@ def download_and_resize(imList):
                     width = (640 * img.shape[1]) / img.shape[0]
                     img = cv2.resize(img,(width, height))
                 cv2.imwrite(savePath,img)
-                print 'Good: ' + savePath
+                print('Good: ' + savePath)
             else:
-                print 'Already saved: ' + savePath
+                print('Already saved: ' + savePath)
         except:
-            print 'Bad: ' + savePath
+            print('Bad: ' + savePath)
 
 def main():
     hotel_f = open('./input/dataset/hotel_info.csv','rb')
