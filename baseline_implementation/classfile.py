@@ -64,23 +64,23 @@ class BatchAllSet:
             cls = int(cls)
             clsPaths = self.classes[cls]['ims']
             clsSources = self.classes[cls]['sources']
-            tcamInds = np.where(clsSources=='tcam')[0]
-            exInds = np.where(clsSources=='expedia')[0]
-            if len(tcamInds) >= self.numPos/2 and len(exInds) >= self.numPos/2:
-                numTcam = self.numPos/2
-                numEx = self.numPos - numTcam
-            elif len(tcamInds) >= self.numPos/2 and len(exInds) < self.numPos/2:
+            traffickcamInds = np.where(clsSources=='traffickcam')[0]
+            exInds = np.where(clsSources=='travel_website')[0]
+            if len(traffickcamInds) >= self.numPos/2 and len(exInds) >= self.numPos/2:
+                numtraffickcam = self.numPos/2
+                numEx = self.numPos - numtraffickcam
+            elif len(traffickcamInds) >= self.numPos/2 and len(exInds) < self.numPos/2:
                 numEx = len(exInds)
-                numTcam = self.numPos - numEx
+                numtraffickcam = self.numPos - numEx
             else:
-                numTcam = len(tcamInds)
-                numEx = self.numPos - numTcam
+                numtraffickcam = len(traffickcamInds)
+                numEx = self.numPos - numtraffickcam
 
-            random.shuffle(tcamInds)
+            random.shuffle(traffickcamInds)
             random.shuffle(exInds)
 
-            for j1 in np.arange(numTcam):
-                imPath = self.classes[cls]['ims'][tcamInds[j1]]
+            for j1 in np.arange(numtraffickcam):
+                imPath = self.classes[cls]['ims'][traffickcamInds[j1]]
                 labels[ctr] = cls
                 ims.append(imPath)
                 ctr += 1
