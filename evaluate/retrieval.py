@@ -1,3 +1,4 @@
+from __future__ import print_function
 # KNN Retrieval Code. Takes in a csv file, computes average top1, top10, top100 retrieval accuracy by hotel instance
 # and average top1, top3, top5 chain accuracy.
 
@@ -21,7 +22,7 @@ def main(csv_file):
         for row in csv_reader:
             query_image_id = int(row[0])
             if len(row) != 101:
-                print "Expected each row to contain a query image ID and 100 result image IDs. Failed at line: " + str(lnNum)
+                print("Expected each row to contain a query image ID and 100 result image IDs. Failed at line: " + str(lnNum))
                 break
             try:
                 query_class = test_id_to_class[query_image_id]
@@ -31,7 +32,7 @@ def main(csv_file):
                 result_dict[query_image_id]['result_classes'] = np.zeros(100,dtype='int')
                 result_dict[query_image_id]['result_chains'] = np.zeros(100,dtype='int')
             except:
-                print "Query image ID ("+row[0]+") in row " + str(lnNum) + " is unknown."
+                print("Query image ID ("+row[0]+") in row " + str(lnNum) + " is unknown.")
                 break
             for idx in range(len(row[1:])):
                 try:
@@ -39,7 +40,7 @@ def main(csv_file):
                     result_dict[query_image_id]['result_classes'][idx] = result_class
                     result_dict[query_image_id]['result_chains'][idx] = classes_to_chain[result_class]
                 except:
-                    print "Result  image ID ("+row[1+idx]+") in row " + str(lnNum) + " is unknown."
+                    print("Result  image ID ("+row[1+idx]+") in row " + str(lnNum) + " is unknown.")
                     break
             lnNum += 1
 
@@ -72,21 +73,21 @@ def main(csv_file):
     only_queries_with_chains = top_k_chain[np.array(known_chain_inds),:]
     average_chain_retrieval_accuracy = np.mean(only_queries_with_chains,axis=0)
 
-    print 'Hotel instance retrieval accuracy for ' + csv_file
-    print 'Top-1: %0.2f' % (average_instance_retrieval_accuracy[0]*100)
-    print 'Top-10: %0.2f' % (average_instance_retrieval_accuracy[9]*100)
-    print 'Top-100: %0.2f' % (average_instance_retrieval_accuracy[99]*100)
+    print('Hotel instance retrieval accuracy for ' + csv_file)
+    print('Top-1: %0.2f' % (average_instance_retrieval_accuracy[0]*100))
+    print('Top-10: %0.2f' % (average_instance_retrieval_accuracy[9]*100))
+    print('Top-100: %0.2f' % (average_instance_retrieval_accuracy[99]*100))
 
-    print '---'
-    print 'Hotel chain retrieval accuracy for ' + csv_file
-    print 'Top-1: %0.2f' % (average_chain_retrieval_accuracy[0]*100)
-    print 'Top-3: %0.2f' % (average_chain_retrieval_accuracy[2]*100)
-    print 'Top-5: %0.2f' % (average_chain_retrieval_accuracy[4]*100)
+    print('---')
+    print('Hotel chain retrieval accuracy for ' + csv_file)
+    print('Top-1: %0.2f' % (average_chain_retrieval_accuracy[0]*100))
+    print('Top-3: %0.2f' % (average_chain_retrieval_accuracy[2]*100))
+    print('Top-5: %0.2f' % (average_chain_retrieval_accuracy[4]*100))
 
 
 if __name__ == "__main__":
     args = sys.argv
     if len(args) < 2:
-        print 'Expected input parameters: csv_file'
+        print('Expected input parameters: csv_file')
     csv_file = args[1]
     main(csv_file)
