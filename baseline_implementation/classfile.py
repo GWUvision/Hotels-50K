@@ -63,7 +63,7 @@ class BatchAllSet:
         for cls in classes:
             cls = int(cls)
             clsPaths = self.classes[cls]['ims']
-            clsSources = self.classes[cls]['sources']
+            clsSources = np.array(self.classes[cls]['sources'])
             traffickcamInds = np.where(clsSources=='traffickcam')[0]
             exInds = np.where(clsSources=='travel_website')[0]
             if len(traffickcamInds) >= self.numPos/2 and len(exInds) >= self.numPos/2:
