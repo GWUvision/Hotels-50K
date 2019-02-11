@@ -6,6 +6,7 @@ import csv
 import numpy as np
 import sys
 from utils import id_to_class_parser, class_to_chain_parser
+import os
 
 def main(csv_file):
     test_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/test_set.csv'))
