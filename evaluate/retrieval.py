@@ -9,6 +9,7 @@ from utils import id_to_class_parser, class_to_chain_parser
 import os
 
 def main(csv_file):
+    dirname = os.path.dirname(__file__)
     test_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/test_set.csv'))
     train_id_to_class = id_to_class_parser(os.path.join(dirname,'..','input/dataset/train_set.csv'))
     classes_to_chain = class_to_chain_parser(os.path.join(dirname,'..','input/dataset/hotel_info.csv'))

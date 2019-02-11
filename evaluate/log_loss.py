@@ -7,19 +7,7 @@ import numpy as np
 import sys
 from sklearn.metrics import log_loss
 from utils import id_to_class_parser
-
-def id_to_class_parser(dataset_file):
-    id_to_class = {}
-    with open(dataset_file) as f:
-        csv_reader = csv.reader(f,delimiter=',')
-        lnNum = 0
-        for row in csv_reader:
-            if lnNum == 0:
-                pass
-            else:
-                id_to_class[int(row[0])] = int(row[1])
-            lnNum += 1
-    return id_to_class
+import os
 
 # csv_file = '../baseline_implementation/class_prob_output/unoccluded.csv'
 def main(csv_file):
