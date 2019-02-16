@@ -3,7 +3,7 @@ import tensorflow as tf
 from classfile import *
 import numpy as np
 import tensorflow.contrib.slim as slim
-from nets import resnet_v2
+from tensorflow.contrib.slim.nets import resnet_v2
 import h5py
 import sys
 import glob
@@ -33,6 +33,7 @@ def main(pretrained_model):
     feat = tf.squeeze(tf.nn.l2_normalize(layers[featLayer],3))
     c = tf.ConfigProto()
     c.gpu_options.visible_device_list=str(3) # specify which gpu you want to run on
+
     sess = tf.Session(config=c)
     saver = tf.train.Saver()
     saver.restore(sess, pretrained_model)
