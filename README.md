@@ -110,10 +110,10 @@ In order to re-produce the results in our paper, you can download our pre-traine
 You can then run:
 
 ```
-python baseline_implementation/extract_features.py path_to_pretrained_model
+python baseline_implementation/extract_features.py pretrained_model_dir/pretrained_model
 ```
 
-to extract the gallery and test image features for each of the different tests (unoccluded, low, medium and high occlusions).
+to extract the gallery and test image features for each of the different tests (unoccluded, low, medium and high occlusions). (Do not include the file suffixes in the pretrained_model name. For example, if you download the pretrained net to hotels50k_snapshot, the above command would be 'python baseline_implementation/extract_features.py hotels50k_snapshot/hotels50k').
 
 To compute the CSV file needed for the retrieval evaluation, you will then want to run:
 ```
