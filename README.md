@@ -18,6 +18,8 @@ We recommend using Python 2.7. To insure the correct dependencies are installed,
 pip install -r requirements.txt
 ```
 
+Re-implementation of our baseline methods additionally requires Facebook's 'Faiss' library for efficient similarity search (https://github.com/facebookresearch/faiss). Instructions for installing Faiss can be found at https://github.com/facebookresearch/faiss/blob/master/INSTALL.md. Be sure to do both step 1 for the library install and step 2 for the Python interface.
+
 ## Downloading the dataset
 The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' file. When you decompress this folder, you will find four csv files with the following headers:
 
