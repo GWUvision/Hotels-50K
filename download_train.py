@@ -4,9 +4,12 @@ import numpy as np
 import urllib
 import urllib.request
 
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+
+opener = AppURLopener()
 def url_to_image(url):
-    req = urllib.request.Request(url, data=None, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
-    resp = urllib.request.urlopen(url)
+    resp = opener.open(url)
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_UNCHANGED)
     return image
