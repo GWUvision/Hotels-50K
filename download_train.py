@@ -28,11 +28,11 @@ def download_and_resize(imList):
                 img = url_to_image(im[4])
                 if img.shape[1] > img.shape[0]:
                     width = 640
-                    height = (640 * img.shape[0]) / img.shape[1]
+                    height = round((640 * img.shape[0]) / img.shape[1])
                     img = cv2.resize(img,(width, height))
                 else:
                     height = 640
-                    width = (640 * img.shape[1]) / img.shape[0]
+                    width = round((640 * img.shape[1]) / img.shape[0])
                     img = cv2.resize(img,(width, height))
                 cv2.imwrite(savePath,img)
                 print('Good: ' + savePath)
