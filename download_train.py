@@ -2,9 +2,11 @@ from __future__ import print_function
 import csv, multiprocessing, cv2, os
 import numpy as np
 import urllib
+import urllib.request
 
 def url_to_image(url):
-    resp = urllib.urlopen(url)
+    req = urllib.request.Request(url, data=None, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    resp = urllib.request.urlopen(url)
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_UNCHANGED)
     return image
@@ -37,14 +39,14 @@ def download_and_resize(imList):
             print('Bad: ' + savePath)
 
 def main():
-    hotel_f = open('./input/dataset/hotel_info.csv','rb')
+    hotel_f = open('./input/dataset/hotel_info.csv','r')
     hotel_reader = csv.reader(hotel_f)
     hotel_headers = next(hotel_reader,None)
     hotel_to_chain = {}
     for row in hotel_reader:
         hotel_to_chain[row[0]] = row[2]
 
-    train_f = open('./input/dataset/train_set.csv','rb')
+    train_f = open('./input/dataset/train_set.csv','r')
     train_reader = csv.reader(train_f)
     train_headers = next(train_reader,None)
 
