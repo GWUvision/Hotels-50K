@@ -11,8 +11,8 @@ requests.packages.urllib3.disable_warnings()
 
 
 def url_to_image(url):
-    proxy_addr = getproxy()
-    proxy = {'http': proxy_addr}
+    #proxy_addr = getproxy()
+    #proxy = {'http': proxy_addr}
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',\
                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',\
                'Accept-Encoding': 'gzip, deflate, br',\
@@ -38,7 +38,7 @@ def url_to_image(url):
 def write_to_log(im,err_msg):
     with open('./error_log.csv','a') as csvfile:
         log = csv.writer(csvfile)
-        log.writerow([im[2],im[3],im[4],err_msg])
+        log.writerow([im[1],im[2],im[3],im[4],err_msg])
         csvfile.close()
 
 # chain,hotel,im_source,im_id,im_url
