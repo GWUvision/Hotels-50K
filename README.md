@@ -11,6 +11,8 @@ The training dataset includes 1,027,871 images from 50,000 hotels, and 92 major 
 
 The test dataset includes 17,954 TraffickCam images from 5,000 different hotels (as well as versions of the test images that have medium and large occlusions to replicate the occlusions seen in real world trafficking victim photographs).
 
+(UPDATE: A large number of the hyperlinks provided in the original dataset were moved after the fact by the imagery providers. We have updated the dataset to have valid imagery as of April 27, 2020. The above values are roughly correct but need to be updated to reflect the new dataset.)
+
 ## Dependencies
 To insure the correct dependencies are installed, run:
 
@@ -28,7 +30,7 @@ The metadata for the hotels, chains and images is in the 'input/dataset.tar.gz' 
 * train_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 * test_set.csv: image_id, hotel_id, image_url, image_source, upload_timestamp
 
-The test images (unoccluded and occluded) can be downloaded from https://www2.seas.gwu.edu/~astylianou/hotels50k/test.tar.gz (3.14GB; to match the training dataset structure, download this file to the images directory and decompress it there).
+The test images (unoccluded and occluded) can be downloaded from https://cs.slu.edu/~stylianou/images/hotels-50k/test.tar.lz4 (3.14GB; to match the training dataset structure, download this file to the images directory and decompress it there).
 
 To download the training images, we provide the 'download_train.py' file, which downloads and scales down the images in the train_set file into 'images/train' (make sure you've decompressed the 'input/dataset.tar.gz' folder first).
 
