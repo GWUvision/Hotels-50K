@@ -12,7 +12,7 @@ The training dataset includes 1,027,871 images from 50,000 hotels, and 92 major 
 The test dataset includes 17,954 TraffickCam images from 5,000 different hotels (as well as versions of the test images that have medium and large occlusions to replicate the occlusions seen in real world trafficking victim photographs).
 
 ## Dependencies
-We recommend using Python 2.7. To insure the correct dependencies are installed, run:
+To insure the correct dependencies are installed, run:
 
 ```
 pip install -r requirements.txt
