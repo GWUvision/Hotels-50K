@@ -1,4 +1,4 @@
 opencv-python
-tensorflow-gpu>=1.5
-sklearn
+tensorflow
+scikit-learn
 h5py
